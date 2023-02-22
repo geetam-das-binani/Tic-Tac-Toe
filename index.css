@@ -16,7 +16,13 @@ nav {
     justify-content: center;
     margin-top: 2em;
     position: relative;
-  
+
+}
+
+.LINE {   
+  display: none;
+    
+
 }
 
 .left {
@@ -27,7 +33,7 @@ nav {
 
 .left .box {
     text-align: center;
-    border: 1px solid black;
+    border: 2px solid black;
     font-size: 5vw;
 }
 
@@ -55,7 +61,7 @@ nav {
 
 .right_game_info {
     margin: 1em;
- 
+
 }
 
 .right_game_info h2 {
@@ -78,10 +84,17 @@ button {
 
 }
 
+.imgbox img {
+    width: 0px;
+    transition: .4s ease-in;
+}
+
 @media (max-width:768px) {
     .game_container {
-    flex-wrap: wrap;
- }
+        /* flex-wrap: wrap; */
+        flex-direction: column;
+        align-items: center;
+    }
 
     .left {
         grid-template-columns: repeat(3, 16vw);
@@ -94,6 +107,16 @@ button {
 
     button {
         margin-top: .5em;
+    }
+
+    .LINE {
+        position: absolute;
+        height: 1px;
+        width: 0%;
+       
+         display: block;
+         top: 20%;
+        transform: translateX(6vw) rotate(-45deg); 
     }
 
 

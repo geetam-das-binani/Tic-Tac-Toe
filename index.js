@@ -3,22 +3,23 @@ let audioturn= new Audio("ting.mp3");
 let gameover=new Audio("gameover.mp3");
 let music=new Audio("music.mp3");
 let isgameover = false;
+let dm=false;
 
 
 
 
 let changeturn = () => {
     if (turn == "X") {
-        return "0"
+        return "0";
     }
     else {
-        return "X"
+        return "X";
     }
     
 }
 
 let checkforwin = () => {
-    let boxtext = document.querySelectorAll(".boxtext")
+    let boxtext = document.querySelectorAll(".boxtext");
     let wins = [[0, 1, 2],
     [3, 4, 5,],
     [6, 7, 8, ],
@@ -31,9 +32,31 @@ let checkforwin = () => {
     wins.forEach((n) => {
         if ((boxtext[n[0]].innerText == boxtext[n[1]].innerText) && (boxtext[n[1]].innerText == boxtext[n[2]].innerText) && (boxtext[n[0]].innerText !== "")) {
             isgameover = true;
-            document.querySelector(".info").innerText = `${boxtext[n[0]].innerText} Won`
-            document.querySelector(".imgbox").getElementsByTagName("img")[0].style.width = "200px"
+            document.querySelector(".info").innerText = `${boxtext[n[0]].innerText} Won`;
+            document.querySelector(".imgbox").getElementsByTagName("img")[0].style.width = "200px";
             gameover.play();
+
+        }
+
+    })
+}
+let drawmatch=()=>{
+    let boxtext = document.querySelectorAll(".boxtext");
+    let wins = [[0, 1, 2],
+    [3, 4, 5,],
+    [6, 7, 8, ],
+    [0, 3, 6, ],
+    [1, 4, 7,],
+    [2, 5, 8, ],
+    [0, 4, 8,],
+    [2, 4, 6, ]]
+
+    wins.forEach((n) => {
+        if ((boxtext[n[0]].innerText !== boxtext[n[1]].innerText) && (boxtext[n[1]].innerText !== boxtext[n[2]].innerText) && (boxtext[n[0]].innerText !== "")) {
+            isgameover = true;
+            document.querySelector(".info").innerText = `Match Draw`;
+          
+          
 
         }
 
@@ -49,8 +72,9 @@ Array.from(box).forEach((element) => {
             audioturn.play();
             turn = changeturn();
             checkforwin();
+            drawmatch();
             if (!isgameover) {
-                document.querySelector(".info").innerText = `Turn for ${turn}`
+                document.querySelector(".info").innerText = `Turn for ${turn}`;
             }
         }
     })
@@ -63,10 +87,11 @@ reset.addEventListener("click", () => {
     for (text of box) {
         let boxtext = text.querySelector(".boxtext")
         boxtext.innerText = "";
-        turn = "X"
-        isgameover = false
+        turn = "X";
+        isgameover = false;
+        dm=false;
         document.querySelector(".info").innerText = `Turn for ${turn}`
-        document.querySelector(".imgbox").getElementsByTagName("img")[0].style.width = "0px"
+        document.querySelector(".imgbox").getElementsByTagName("img")[0].style.width = "0px";
     
 
     }
